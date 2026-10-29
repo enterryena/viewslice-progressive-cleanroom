@@ -15,8 +15,8 @@ def main():
     venv=ext_dir/'venv'
     subprocess.check_call([python_exe,'-m','venv',str(venv)])
     py=venv/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
-    subprocess.check_call([str(py),'-m','pip','install','numpy>=1.24,<3','trimesh>=4,<6','pillow>=10,<13','psutil>=5.9,<8'])
-    subprocess.check_call([str(py),'-c','import numpy,trimesh,PIL,psutil;print("ViewSlice dependencies OK")'])
+    subprocess.check_call([str(py),'-m','pip','install','numpy>=1.24,<3','trimesh>=4,<6','pillow>=10,<13','psutil>=5.9,<8','scipy>=1.11,<2'])
+    subprocess.check_call([str(py),'-c','import numpy,trimesh,PIL,psutil,scipy;print("ViewSlice dependencies OK")'])
     print('ViewSlice Progressive CleanRoom installed',flush=True)
 
 if __name__=='__main__':
