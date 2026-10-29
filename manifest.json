@@ -1,0 +1,234 @@
+{
+  "id": "viewslice-progressive-cleanroom",
+  "name": "ViewSlice Progressive CleanRoom M0.2.1 Alpha",
+  "version": "0.2.1",
+  "type": "process",
+  "author": "Independent CleanRoom Prototype",
+  "description": "Experimental local Modly process extension for static GLB progressive mesh refinement with UV/material/normal preservation and NumPy 2.x compatibility. M1/M2 features incomplete.",
+  "entry": "generator.py",
+  "nodes": [
+    {
+      "id": "progressive",
+      "name": "Adaptive Progressive / Rig Planning",
+      "input": "mesh",
+      "output": "mesh",
+      "params_schema": [
+        {
+          "id": "operation",
+          "label": "Operation",
+          "type": "select",
+          "default": "progressive",
+          "options": [
+            {
+              "value": "analyze",
+              "label": "Analyze only"
+            },
+            {
+              "value": "progressive",
+              "label": "Adaptive refine existing mesh"
+            },
+            {
+              "value": "fit",
+              "label": "Fit existing vertices to silhouettes"
+            },
+            {
+              "value": "fit_subdivide",
+              "label": "Fit + adaptive refine"
+            },
+            {
+              "value": "rig_plan",
+              "label": "Make rig plan JSON only"
+            },
+            {
+              "value": "rig_apply",
+              "label": "Apply bones + skin weights in Blender"
+            }
+          ]
+        },
+        {
+          "id": "extra_export",
+          "label": "Extra static format",
+          "type": "select",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "GLB only"
+            },
+            {
+              "value": "obj",
+              "label": "OBJ"
+            },
+            {
+              "value": "ply",
+              "label": "PLY"
+            },
+            {
+              "value": "stl",
+              "label": "STL"
+            },
+            {
+              "value": "off",
+              "label": "OFF"
+            },
+            {
+              "value": "3mf",
+              "label": "3MF"
+            }
+          ]
+        },
+        {
+          "id": "steps",
+          "label": "Iterations (use 1 for low load)",
+          "type": "int",
+          "min": 1,
+          "max": 3,
+          "default": 1
+        },
+        {
+          "id": "effort",
+          "label": "Refinement load 0.2-2.0",
+          "type": "float",
+          "default": 1.0,
+          "min": 0.2,
+          "max": 2.0,
+          "step": 0.2
+        },
+        {
+          "id": "region",
+          "label": "Priority region",
+          "type": "select",
+          "default": "all",
+          "options": [
+            {
+              "value": "all",
+              "label": "Full model"
+            },
+            {
+              "value": "head",
+              "label": "Head/top"
+            },
+            {
+              "value": "torso",
+              "label": "Mid-body"
+            },
+            {
+              "value": "lower",
+              "label": "Lower part"
+            }
+          ]
+        },
+        {
+          "id": "reference_dir",
+          "label": "ViewSlice reference folder (optional)",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "id": "detail_strength",
+          "label": "Silhouette correction strength",
+          "type": "float",
+          "default": 0.12,
+          "min": 0,
+          "max": 0.35,
+          "step": 0.05
+        },
+        {
+          "id": "fit_strength",
+          "label": "Fit strength",
+          "type": "float",
+          "default": 0.2,
+          "min": 0,
+          "max": 0.7,
+          "step": 0.05
+        },
+        {
+          "id": "up_axis",
+          "label": "Up axis",
+          "type": "select",
+          "default": "y",
+          "options": [
+            {
+              "value": "y",
+              "label": "Y up GLB"
+            },
+            {
+              "value": "z",
+              "label": "Z up OBJ"
+            }
+          ]
+        },
+        {
+          "id": "rig_profile",
+          "label": "Rig morphology",
+          "type": "select",
+          "default": "humanoid",
+          "options": [
+            {
+              "value": "humanoid",
+              "label": "Human"
+            },
+            {
+              "value": "quadruped",
+              "label": "Quadruped"
+            },
+            {
+              "value": "bird",
+              "label": "Bird"
+            },
+            {
+              "value": "insect",
+              "label": "Insect"
+            },
+            {
+              "value": "fish",
+              "label": "Fish"
+            },
+            {
+              "value": "snake",
+              "label": "Snake/Eel"
+            },
+            {
+              "value": "plant",
+              "label": "Plant"
+            },
+            {
+              "value": "tentacle",
+              "label": "Tentacle creature"
+            },
+            {
+              "value": "jellyfish",
+              "label": "Jellyfish"
+            },
+            {
+              "value": "generic",
+              "label": "Unknown/Soft body"
+            }
+          ]
+        },
+        {
+          "id": "rig_segments",
+          "label": "Long-body segments",
+          "type": "int",
+          "default": 7,
+          "min": 2,
+          "max": 40
+        },
+        {
+          "id": "rig_appendages",
+          "label": "Branch/tentacle/limb count",
+          "type": "int",
+          "default": 6,
+          "min": 2,
+          "max": 24
+        },
+        {
+          "id": "blender_path",
+          "label": "Blender executable path (rig_apply)",
+          "type": "string",
+          "default": ""
+        }
+      ]
+    }
+  ]
+}

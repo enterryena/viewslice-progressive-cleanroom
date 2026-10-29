@@ -1,0 +1,12 @@
+numpy>=1.24,<3
+trimesh>=4,<6
+pillow>=10,<13
+psutil>=5.9,<8
+
+# Extra format support: COLLADA DAE, 3MF and glTF image dependencies
+pycollada>=0.8,<1
+lxml>=5,<7
+networkx>=3,<5
+
+# Required only when transferring existing skin weights between characters
+scipy>=1.11,<2
